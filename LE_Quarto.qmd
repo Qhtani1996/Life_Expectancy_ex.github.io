@@ -1,10 +1,12 @@
 ---
-title: "Life_Expectancy_ex.github.io"
+title: "Life Expectancy Example"
+author: "Meshal AlQahtani"
+format: html
+knitr:
+  opts_chunk:
+    fig.width: 10
+    fig.height: 6
 ---
-
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
 
 ## Introduction
 
@@ -111,7 +113,6 @@ ggplot(data, aes(x = year, y = Life_Expectancy, group = Country)) +
 ```
 
 ```{r, message=FALSE, warning=FALSE}
-install.packages("ggridges")
 library(ggridges)
 
 ggplot(data, aes(x = Life_Expectancy, y = as.factor(year), fill = ..x..)) +

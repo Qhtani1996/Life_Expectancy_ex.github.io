@@ -1,10 +1,14 @@
 ---
-title: "Life_Expectancy_ex.github.io"
+title: "Life Expectancy Example"
+author: "Meshal AlQahtani"
+format: pdf
+knitr:
+  opts_chunk:
+    fig.width: 10
+    fig.height: 6
 ---
 
-This is a Quarto website.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
 
 ## Introduction
 
@@ -14,9 +18,27 @@ Below are example graphs created using RStudio and published with Quarto. Over t
 
 You can find the data I used here: [Global Health Observatory](https://www.who.int/data/gho)
 
-```{r, message=FALSE, warning=FALSE}
 
+
+::: {.cell}
+
+```{.r .cell-code}
 install.packages("devtools", repos = "https://cloud.r-project.org")
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+package 'devtools' successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+	C:\Users\Admin\AppData\Local\Temp\RtmpW8FMij\downloaded_packages
+```
+
+
+:::
+
+```{.r .cell-code}
 library(streamgraph)
 library(dplyr)
 library(readr)
@@ -26,10 +48,17 @@ library(here)
 file_path <- here("data", "Long_Format_Life_Expectancy_Data_for_Streamgraph.csv")
 data <- read_csv(file_path)
 ```
+:::
+
+
 
 ## the LE over the years among G20 countries
 
-```{r, message=FALSE, warning=FALSE}
+
+
+::: {.cell}
+
+```{.r .cell-code}
 library(ggplot2)
 library(ggrepel)
 library(dplyr)
@@ -73,10 +102,16 @@ p <- p + geom_text_repel(data = filter(data_ranked, year == max(year)),
 # Make it interactive with plotly
 library(plotly)
 ggplotly(p)
-
 ```
 
-```{r, message=FALSE, warning=FALSE}
+::: {.cell-output-display}
+![](LE_Quarto_files/figure-pdf/unnamed-chunk-2-1.pdf){fig-pos='H'}
+:::
+:::
+
+::: {.cell}
+
+```{.r .cell-code}
 library(ggplot2)
 library(dplyr)
 
@@ -95,10 +130,16 @@ ggplot(selected_years, aes(x = year, y = Life_Expectancy, group = Country, color
     y = "Life Expectancy"
   ) +
   theme(legend.position = "none")
-
 ```
 
-```{r, message=FALSE, warning=FALSE}
+::: {.cell-output-display}
+![](LE_Quarto_files/figure-pdf/unnamed-chunk-3-1.pdf){fig-pos='H'}
+:::
+:::
+
+::: {.cell}
+
+```{.r .cell-code}
 library(ggplot2)
 library(ggrepel)
 
@@ -107,11 +148,16 @@ ggplot(data, aes(x = year, y = Life_Expectancy, group = Country)) +
   facet_wrap(~Country, scales = "free_y") +
   theme_minimal() +
   labs(title = "Life Expectancy Trends by Country", x = "Year", y = "Life Expectancy")
-
 ```
 
-```{r, message=FALSE, warning=FALSE}
-install.packages("ggridges")
+::: {.cell-output-display}
+![](LE_Quarto_files/figure-pdf/unnamed-chunk-4-1.pdf){fig-pos='H'}
+:::
+:::
+
+::: {.cell}
+
+```{.r .cell-code}
 library(ggridges)
 
 ggplot(data, aes(x = Life_Expectancy, y = as.factor(year), fill = ..x..)) +
@@ -119,10 +165,16 @@ ggplot(data, aes(x = Life_Expectancy, y = as.factor(year), fill = ..x..)) +
   scale_fill_viridis_c() +
   theme_minimal() +
   labs(title = "Life Expectancy Distribution Over Time", x = "Life Expectancy", y = "Year")
-
 ```
 
-```{r, message=FALSE, warning=FALSE}
+::: {.cell-output-display}
+![](LE_Quarto_files/figure-pdf/unnamed-chunk-5-1.pdf){fig-pos='H'}
+:::
+:::
+
+::: {.cell}
+
+```{.r .cell-code}
 library(ggplot2)
 library(dplyr)
 library(readr)
@@ -164,18 +216,57 @@ interactive_plot <- ggplotly(p, tooltip = "text")
 
 # Display
 interactive_plot
-
 ```
+
+::: {.cell-output-display}
+![](LE_Quarto_files/figure-pdf/unnamed-chunk-6-1.pdf){fig-pos='H'}
+:::
+:::
+
+
 
 ## GDPR Visualization from : <https://github.com/davidsjoberg/ggbump?tab=readme-ov-file>
 
-```{r, message=FALSE, warning=FALSE}
+
+
+::: {.cell}
+
+```{.r .cell-code}
 options(repos = c(CRAN = "https://cloud.r-project.org"))
 
 # Load necessary packages
 install.packages("pacman")
-install.packages("rnaturalearthdata")
+```
 
+::: {.cell-output .cell-output-stdout}
+
+```
+package 'pacman' successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+	C:\Users\Admin\AppData\Local\Temp\RtmpW8FMij\downloaded_packages
+```
+
+
+:::
+
+```{.r .cell-code}
+install.packages("rnaturalearthdata")
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+package 'rnaturalearthdata' successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+	C:\Users\Admin\AppData\Local\Temp\RtmpW8FMij\downloaded_packages
+```
+
+
+:::
+
+```{.r .cell-code}
 pacman::p_load(BBmisc, tidyverse, hablar, ggbump, sf, rnaturalearth, feather, janitor, lubridate)
 options(stringsAsFactors = F)
 
@@ -242,5 +333,10 @@ ggplot() +
         plot.caption = element_text(color = "gray40"),
         plot.title = element_text(color = "gray40", size = 16, family = "Helvetica", face = "bold"),
         plot.subtitle = element_text(color = "gray40", size = 8))
-
 ```
+
+::: {.cell-output-display}
+![](LE_Quarto_files/figure-pdf/unnamed-chunk-7-1.pdf){fig-pos='H'}
+:::
+:::
+
